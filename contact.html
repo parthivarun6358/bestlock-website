@@ -29,6 +29,11 @@
       color: white;
       border: none;
       border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: darkblue;
     }
   </style>
 </head>
@@ -60,7 +65,7 @@
       statusEl.style.color = "white";
 
       try {
-        const resp = await fetch(`/contact`, {
+        const resp = await fetch("/api/contact", {   // ✅ FIXED
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -72,35 +77,22 @@
           })
         });
 
+        const data = await resp.json();
+
         if (!resp.ok) {
-          const contentType = resp.headers.get("content-type") || "";
-          if (contentType.includes("application/json")) {
-            const data = await resp.json();
-            throw new Error(data?.message || "Request failed");
-          }
-
-          const text = await resp.text();
-          throw new Error(text || "Request failed");
+          throw new Error(data.message || "Request failed");
         }
 
-        const contentType = resp.headers.get("content-type") || "";
-        let serverMessage = "Message Sent!";
-
-        if (contentType.includes("application/json")) {
-          const data = await resp.json();
-          serverMessage = data?.message || serverMessage;
-        } else {
-          const text = await resp.text();
-          serverMessage = text || serverMessage;
-        }
-
+        // Clear form
         nameEl.value = "";
         emailEl.value = "";
         messageEl.value = "";
-        statusEl.textContent = serverMessage;
+
+        statusEl.textContent = data.message || "Message Sent!";
         statusEl.style.color = "#c8ffdf";
+
       } catch (err) {
-        statusEl.textContent = err?.message || "Failed to send. Is the server running?";
+        statusEl.textContent = err.message || "Failed to send!";
         statusEl.style.color = "#ffd1d1";
         console.error(err);
       }
