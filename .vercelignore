@@ -1,0 +1,6 @@
+.env
+node_modules
+server.js
+tmp-mysql-test.js
+server*.log
+
