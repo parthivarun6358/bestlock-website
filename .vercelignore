@@ -1,6 +1,5 @@
 .env
 node_modules
-server.js
+dev
 tmp-mysql-test.js
 server*.log
-

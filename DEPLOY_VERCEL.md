@@ -9,6 +9,9 @@ This project is a static site (HTML) with Vercel Serverless Functions for the co
   - `POST /contact` → rewrites to `api/contact.js`
   - `GET /health/email` → rewrites to `api/health/email.js`
 
+Local-only dev server:
+- `npm start` runs `dev/server.js` (not used on Vercel)
+
 ## Steps (Vercel Dashboard)
 
 1. Push this folder to GitHub.
@@ -31,4 +34,3 @@ This project is a static site (HTML) with Vercel Serverless Functions for the co
 
 - Open: `/contact.html` and submit the form.
 - Check: `/health/email` should show `"ready": true`.
-

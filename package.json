@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "node server.js"
+    "start": "node dev/server.js"
   },
   "dependencies": {
     "cars": "^1.1.6",
